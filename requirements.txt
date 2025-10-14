@@ -1,0 +1,5 @@
+requests
+pandas
+finnhub-python
+python-dotenv
+pyTelegramBotAPI

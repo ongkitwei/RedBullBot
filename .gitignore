@@ -1,0 +1,54 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*$py.class
+
+# === Virtual environment ===
+venv/
+.env/
+.envrc
+.venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# === Environment variables ===
+# (contains secrets like BOT_TOKEN)
+.env
+
+# === OS / IDE files ===
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# === Logs & caches ===
+*.log
+logs/
+.cache/
+.pytest_cache/
+coverage/
+
+# === Distribution / packaging ===
+build/
+dist/
+*.egg-info/
+*.egg
+
+# === Misc ===
+# Byte-compiled or backup files
+*.bak
+*.tmp
+
+# === Notebooks / exports (optional) ===
+*.ipynb_checkpoints
+
+# === Ignore token or config JSON ===
+config.json
+token.json
