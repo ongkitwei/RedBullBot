@@ -76,13 +76,22 @@ def fetch_earnings_data(date_str):
 def find_upcoming_earnings():
     """
     Fetches and returns a single formatted string of all stocks scheduled to 
-    report earnings within the current calendar day, suitable for a chat bot.
-    (Approximating a 24-hour window: run time until midnight tonight.)
+    report earnings within the current US market calendar day, suitable for a chat bot.
+    
+    The date is calculated using a time zone offset (SGT - 12 hours) to align 
+    with the US Eastern Time calendar, making the results relevant for an SGT user.
     """
     print("--- Starting Earnings Calendar Fetch (via NASDAQ Data) ---")
     
-    # Define the date range: Only Today (Approximates 24 hours from run time)
-    today = datetime.now().date()
+    # ------------------------------------------------------------------
+    # ADJUSTMENT FOR SGT TIME ZONE
+    # ------------------------------------------------------------------
+    # Get current time (SGT) and apply offset to find the current US market date.
+    # This ensures that even early morning SGT runs fetch the correct day's data.
+    current_sgt_datetime = datetime.now()
+    us_market_datetime = current_sgt_datetime - timedelta(hours=US_MARKET_OFFSET_HOURS)
+    today = us_market_datetime.date() # This is the US calendar date
+    # ------------------------------------------------------------------
     
     # Check only today
     date_range = [today] 
@@ -92,18 +101,26 @@ def find_upcoming_earnings():
     for i, date in enumerate(date_range):
         date_str = date.strftime("%Y-%m-%d")
         # Keep this print for console feedback during execution
-        print(f"Checking earnings scheduled for {date_str}...") 
+        print(f"Checking earnings scheduled for {date_str} (US Market Date)...") 
         
         daily_earnings = fetch_earnings_data(date_str)
-        all_earnings.extend(daily_earnings)
         
+        # FIX: Ensure daily_earnings is iterable before calling extend()
+        if daily_earnings is not None:
+            all_earnings.extend(daily_earnings)
+        else:
+            # This logs an unexpected NoneType return, which should not happen 
+            # with the current fetch_earnings_data implementation, but acts as 
+            # a safeguard if the external function is modified or fails oddly.
+            print(f"    - WARNING: fetch_earnings_data for {date_str} returned None, skipping extension.")
+
         # Add a small delay between requests to be polite to the server
         if i < len(date_range) - 1:
             time.sleep(1) 
 
     if not all_earnings:
         # Updated message to reflect checking only today
-        return "✅ No earnings announcements found for today."
+        return "✅ No earnings announcements found for today (US Market Date)."
 
     # 2. Process Data
     
@@ -145,7 +162,7 @@ def find_upcoming_earnings():
     formatted_lines = [
         "<b>📈 Upcoming Earnings Announcements📈</b>",
         # Updated header to reflect only today's date
-        f"📅 Date Range: {today.strftime('%b %d, %Y')}\n" 
+        f"📅 Date Range (Based on US Market Calendar): {today.strftime('%b %d, %Y')}\n" 
     ]
     
     for index, row in results.iterrows():
