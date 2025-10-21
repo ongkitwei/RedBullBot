@@ -7,10 +7,11 @@ import time
 
 def getTopMarketNews():
     try:
+        # Note: API key is hardcoded here, which is generally bad practice. 
+        # It's better to pass it or load it from an environment variable.
         finnhub_client = finnhub.Client(api_key="d1no9l1r01qovv8kh4n0d1no9l1r01qovv8kh4ng")
         urlLink = []
         noOfNews = 0
-        # allNews = json.dumps(finnhub_client.general_news('general', min_id=0), indent=2)
         rawNews = finnhub_client.general_news('general', min_id=0)
 
         for x in rawNews:
@@ -84,8 +85,12 @@ def find_upcoming_earnings():
     print("--- Starting Earnings Calendar Fetch (via NASDAQ Data) ---")
     
     # ------------------------------------------------------------------
-    # ADJUSTMENT FOR SGT TIME ZONE
+    # ADJUSTMENT FOR SGT TIME ZONE (Moved US_MARKET_OFFSET_HOURS here to resolve NameError)
     # ------------------------------------------------------------------
+    # Approximate offset for US Eastern Time (ET) from SGT (UTC+8).
+    # SGT (UTC+8) is 12 hours ahead of EDT (UTC-4)
+    US_MARKET_OFFSET_HOURS = 12 
+    
     # Get current time (SGT) and apply offset to find the current US market date.
     # This ensures that even early morning SGT runs fetch the correct day's data.
     current_sgt_datetime = datetime.now()
