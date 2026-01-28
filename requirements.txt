@@ -44,7 +44,6 @@ pycparser==2.23
 pydantic==2.12.5
 pydantic_core==2.41.5
 pyee==11.1.1
-pyppeteer==2.0.0
 pyquery==2.0.1
 pyTelegramBotAPI==4.29.1
 python-dateutil==2.9.0.post0
@@ -52,7 +51,6 @@ python-dotenv==1.1.1
 pytz==2025.2
 PyYAML==6.0.3
 requests==2.32.5
-requests-html==0.10.0
 requests-toolbelt==1.0.0
 rsa==4.9.1
 sgmllib3k==1.0.0
@@ -67,8 +65,8 @@ tzdata==2025.2
 urllib3==1.26.20
 uuid_utils==0.14.0
 w3lib==2.3.1
-websockets>=10.0,<11.0
 yahoo-fin==0.8.9.1
 yfinance==0.2.66
 zipp==3.23.0
 zstandard==0.25.0
+playwright
