@@ -49,7 +49,7 @@ Present the following metrics clearly in a markdown table, detailing current val
 
 ### 11. Valuation Models
 * PEG Ratio: Provide the current PEG ratio and state whether it implies undervaluation relative to growth.
-* Discounted Cash Flow (DCF) Valuation: Run a multi-scenario DCF model. Clearly state your assumptions (Discount Rate/WACC, Terminal Growth Rate, and FCF Growth Rates) for three cases:
+* Discounted Cash Flow (DCF) Valuation: Run a multi-scenario DCF model. Do not be too conservative, maybe can refer to growth and valuations from professionals and the sector itself. Clearly state your assumptions (Discount Rate/WACC, Terminal Growth Rate, and FCF Growth Rates) for three cases:
     * *Worst Case Scenario:* (Conservative assumptions, compressed margins, low growth) -> Calculate Intrinsic Value.
     * *Base Case Scenario:* (Most likely consensus assumptions) -> Calculate Intrinsic Value.
     * *Upside Case Scenario:* (Optimistic/Bullish assumptions, market expansion) -> Calculate Intrinsic Value.
